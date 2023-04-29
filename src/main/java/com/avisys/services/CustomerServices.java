@@ -20,4 +20,10 @@ public interface CustomerServices {
 	  ResponseEntity<Customer> getCustomer(Long id);
 	 
 	 ResponseEntity<String> deleteCustomerByMobileNumber(String mobileNumber);
+	 
+	 
+	 ResponseEntity<String> updateCustomerMobileNumber (Long custId,String MobileNumber );
+	 
+	 ResponseEntity<String> deleteMobileNumberfromCustomer(String Mobilenumber,Long CustomerId);
+	 
 }

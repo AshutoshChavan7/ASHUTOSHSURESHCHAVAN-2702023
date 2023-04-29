@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import com.avisys.dto.CustomerDTO;
 import com.avisys.entities.Customer;
 import com.avisys.services.CustomerServices;
@@ -73,5 +72,21 @@ public class CustomerController {
 		 return service.deleteCustomerByMobileNumber(mobileNumber);	
 	
 	 }
+	 
+	 
+	 @PatchMapping("/update/{mobileNumber}/{customerId}")
+	 public ResponseEntity<String> updateCustomerMobileNumber( @PathVariable Long customerId, @PathVariable String mobileNumber){
+		 
+		 return service.updateCustomerMobileNumber(customerId,mobileNumber);
+	 }
+	 
+	 @DeleteMapping("/delete/{mobileNumber}/{customerId}")
+	 
+	 public ResponseEntity<String> deleteMobileNumberfromCustomer(@PathVariable String mobileNumber, @PathVariable Long customerId) {
+		 
+		 return service.deleteMobileNumberfromCustomer(mobileNumber, customerId);	
+	
+	 }
+	 
 
 }
