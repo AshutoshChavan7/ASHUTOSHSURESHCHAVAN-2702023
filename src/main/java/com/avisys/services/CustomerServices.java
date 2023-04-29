@@ -11,11 +11,13 @@ public interface CustomerServices {
 
 	List<Customer> fetchAllCustomers();
 	
-	public List<Customer> searchUsers(String firstName, String lastName);
+	 List<Customer> searchUsers(String firstName, String lastName);
 	
-	 public Customer getCustomerByMobileNumber(String mobileNumber);
+	  Customer getCustomerByMobileNumber(String mobileNumber);
 	 
-	 public ResponseEntity<String> createCustomer(Customer customer);
+	  ResponseEntity<String> createCustomer(Customer customer);
 	 
-	 public ResponseEntity<Customer> getCustomer(Long id);
+	  ResponseEntity<Customer> getCustomer(Long id);
+	 
+	 ResponseEntity<String> deleteCustomerByMobileNumber(String mobileNumber);
 }

@@ -66,7 +66,12 @@ public class CustomerController {
 	
 	
 	
+	//this method will delete persistant entity from database based on mobile number given
+	 @DeleteMapping("/delete/{mobileNumber}")
+	public ResponseEntity<String> deleteCustomerByMobileNumber(@PathVariable String mobileNumber) {
+	 
+		 return service.deleteCustomerByMobileNumber(mobileNumber);	
 	
-	
+	 }
 
 }

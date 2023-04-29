@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.avisys.entities.Customer;
 import com.avisys.repositories.CustomerRepository;
@@ -71,5 +73,18 @@ public class CustomerServiceImpl implements CustomerServices {
 	        return customer.map(ResponseEntity::ok)
 	                .orElse(ResponseEntity.notFound().build());
 	}
+	
+	
+	 
+	    public ResponseEntity<String> deleteCustomerByMobileNumber( String mobileNumber) {
+	        Optional<Customer> customerOptional = repo.findByMobileNumber(mobileNumber);
+	        if (customerOptional.isPresent()) {
+	            Customer customer = customerOptional.get();
+	            repo.delete(customer);
+	            return ResponseEntity.ok("Customer with mobile number " + mobileNumber + " has been deleted");
+	        } else {
+	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Customer with mobile number " + mobileNumber + " not found");
+	        }
+	    }
 
 }
