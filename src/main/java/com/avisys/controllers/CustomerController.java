@@ -49,5 +49,12 @@ public class CustomerController {
 		}
 		return ResponseEntity.ok(customer);
 	}
+	
+	
+	//this will create new customer and store in DB
+	@PostMapping
+	    public ResponseEntity<String> createCustomer(@RequestBody Customer customer) {
+	        return service.createCustomer(customer);
+	    }
 
 }

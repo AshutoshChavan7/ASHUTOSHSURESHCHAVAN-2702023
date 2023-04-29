@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.avisys.entities.Customer;
@@ -47,6 +50,18 @@ public class CustomerServiceImpl implements CustomerServices {
 	public Customer getCustomerByMobileNumber(String mobileNumber) {
 		Optional<Customer> customer = repo.findByMobileNumber(mobileNumber);
         return customer.orElse(null);
+	}
+
+	//this method will insert new customer and return status whether customer added or not 
+	@Override
+	public ResponseEntity<String> createCustomer(Customer customer) {
+		Optional<Customer> existingCustomer = repo.findByMobileNumber(customer.getMobileNumber());
+        if (existingCustomer.isPresent()) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Unable to create Customer. Mobile number already present.");
+        }
+        repo.save(customer);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 
 }
