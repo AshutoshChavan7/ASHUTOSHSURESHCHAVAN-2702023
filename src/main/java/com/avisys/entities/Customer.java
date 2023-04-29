@@ -1,5 +1,6 @@
 package com.avisys.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -28,7 +29,12 @@ public class Customer {
 
 	@Column(name = "MOBILE_NUMBER", unique = true, nullable = false)
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL ,fetch = FetchType.EAGER)
-	private List<MobileNumber> mobileNumbers;
+	private List<MobileNumber> mobileNumbers=new ArrayList<>();
+	
+	public void addMobileNumber(String number) {
+        MobileNumber mobileNumber = new MobileNumber(number, this);
+        mobileNumbers.add(mobileNumber);
+    }
 
 	public Long getId() {
 		return id;

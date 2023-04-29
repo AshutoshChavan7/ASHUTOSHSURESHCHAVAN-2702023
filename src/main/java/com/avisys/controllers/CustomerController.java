@@ -6,8 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
-
+import com.avisys.dto.CustomerDTO;
 import com.avisys.entities.Customer;
 import com.avisys.services.CustomerServices;
 
@@ -51,11 +50,22 @@ public class CustomerController {
 	}
 	
 	
-	//this will create new customer and store in DB
+	//this will create new customer and store in DB ,updated method in task 4 to add multiple numbers under single customer
 	@PostMapping
-	    public ResponseEntity<String> createCustomer(@RequestBody Customer customer) {
-	        return service.createCustomer(customer);
+	    public ResponseEntity<String> createCustomer(@RequestBody CustomerDTO customer) {
+		Customer customer1 = new Customer();
+        customer1.setFirstName(customer.getFirstName());
+        customer1.setLastName(customer.getLastName());
+        for (String number : customer.getMobileNumbers()) {
+            customer1.addMobileNumber(number);
+        }
+        
+		return service.createCustomer(customer1);
+	        
 	    }
+	
+	
+	
 	
 	
 

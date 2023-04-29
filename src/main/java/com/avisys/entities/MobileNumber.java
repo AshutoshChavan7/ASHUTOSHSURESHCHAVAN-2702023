@@ -19,6 +19,14 @@ public class MobileNumber {
 	    @ManyToOne
 	    @JoinColumn(name = "customer_id")
 	    private Customer customer;
+	    
+	    
+
+		public MobileNumber(String mobileNumber, Customer customer) {
+			super();
+			this.mobileNumber = mobileNumber;
+			this.customer = customer;
+		}
 
 		public Long getId() {
 			return id;
