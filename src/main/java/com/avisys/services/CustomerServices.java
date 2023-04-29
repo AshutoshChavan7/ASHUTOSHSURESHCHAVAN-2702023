@@ -16,4 +16,6 @@ public interface CustomerServices {
 	 public Customer getCustomerByMobileNumber(String mobileNumber);
 	 
 	 public ResponseEntity<String> createCustomer(Customer customer);
+	 
+	 public ResponseEntity<Customer> getCustomer(Long id);
 }

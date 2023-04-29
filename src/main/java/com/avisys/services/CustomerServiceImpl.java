@@ -55,13 +55,21 @@ public class CustomerServiceImpl implements CustomerServices {
 	//this method will insert new customer and return status whether customer added or not 
 	@Override
 	public ResponseEntity<String> createCustomer(Customer customer) {
-		Optional<Customer> existingCustomer = repo.findByMobileNumber(customer.getMobileNumber());
+        Optional<Customer> existingCustomer = repo.findById(customer.getId());
         if (existingCustomer.isPresent()) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Unable to create Customer. Mobile number already present.");
         }
         repo.save(customer);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+	//this method will return customer along with mobile numbers 
+	@Override
+	public ResponseEntity<Customer> getCustomer(Long id) {
+		 Optional<Customer> customer = repo.findByIdWithMobileNumbers(id);
+	        return customer.map(ResponseEntity::ok)
+	                .orElse(ResponseEntity.notFound().build());
 	}
 
 }
